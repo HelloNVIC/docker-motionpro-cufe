@@ -1,0 +1,15 @@
+services:
+  motionpro:
+    # build: .
+    container_name: motionpro
+    image: lihaotong0712/docker-motionpro:latest
+    restart: unless-stopped
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    command: MotionPro -h "${HOST}" -u "${USER}" -p "${PASSWD}" -l debug -c inf
+    ports:
+      - 10801:1080
+    volumes:
+      - ./logs:/var/log/MotionPro
